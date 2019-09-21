@@ -63,6 +63,7 @@ void CPartie::Definir_IMH_Donne_Camp(int preneur)
 			defenseur[nombre_defenseur] = lesJoueurs[i];
 			nombre_defenseur++;
 		}
+
 	}
 	lesDonnes[nombre_donne]->SetDefenseur(defenseur);
 }
