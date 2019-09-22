@@ -19,16 +19,19 @@ MFC_DONNE::MFC_DONNE(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent)
 	, STjoueur2(_T(""))
 	, STjoueur3(_T(""))
 	, STjoueur4(_T(""))
-
 	, nbre_point_preneur(0)
 	, Nbre_bout_preneur(0)
 {
 	for (int i = 0; i < 4; i++)
 		this->lesJoueurs[i] = lesJoueurs[i];
+
+	this->laPartie = laPartie;
+
 	STjoueur1 = lesJoueurs[0]->lireNom().c_str();
 	STjoueur2 = lesJoueurs[1]->lireNom().c_str();
 	STjoueur3 = lesJoueurs[2]->lireNom().c_str();
 	STjoueur4 = lesJoueurs[3]->lireNom().c_str();
+
 	nbre_point_preneur = 0;
 	Nbre_bout_preneur = 0;
 }
@@ -126,52 +129,41 @@ void MFC_DONNE::OnBnClickedcontrat4()
 	numero_contrat = 4;
 }
 
-
-
 void MFC_DONNE::OnBnClickedpoignee0()
 {
 	numero_poignee = 0;
 }
-
 
 void MFC_DONNE::OnBnClickedpoignee1()
 {
 	numero_poignee = 1;
 }
 
-
-
 void MFC_DONNE::OnBnClickedpoignee2()
 {
 	numero_poignee = 2;
 }
-
 
 void MFC_DONNE::OnBnClickedpoignee3()
 {
 	numero_poignee = 3;
 }
 
-
 void MFC_DONNE::OnBnClickedpab0()
 {
 	numero_pab = -1;
 }
-
 
 void MFC_DONNE::OnBnClickedpab1()
 {
 	numero_pab = 0;
 }
 
-
 void MFC_DONNE::OnBnClickedpab2()
 {
 	numero_pab = 1;
 
 }
-
-
 
 void MFC_DONNE::OnBnClickedboutonfindonne()
 {
@@ -188,7 +180,7 @@ void MFC_DONNE::OnBnClickedboutonfindonne()
 	laPartie->Transfert_IHM_Donne_points(point_preneur);
 	laPartie->Transfert_IHM_Donne_bouts(bout_preneur);
 	laPartie->Fin_Donne("save.csv");
-
+	
 	Score score(lesJoueurs, laPartie, this);
 	score.DoModal();
 }

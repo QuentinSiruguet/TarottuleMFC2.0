@@ -21,10 +21,12 @@ SaisieDesJoueurs::SaisieDesJoueurs(CWnd* pParent /*=NULL*/)
 {
 	for (int i = 0; i < 4; i++)
 		lesJoueurs[i] = new CJoueur;
+
 }
 
 SaisieDesJoueurs::~SaisieDesJoueurs()
 {
+	delete laPartie;
 }
 
 void SaisieDesJoueurs::DoDataExchange(CDataExchange* pDX)
@@ -115,8 +117,10 @@ void SaisieDesJoueurs::OnBnClickedButton2()
 	lesJoueurs[3]->ajout_nom(saisie4);
 
 	UpdateData(false);
-	// TODO: ajoutez ici le code de votre gestionnaire de notification de contrôle
 
+	// TODO: ajoutez ici le code de votre gestionnaire de notification de contrôle
+	laPartie = new CPartie(lesJoueurs);
+	laPartie->Nouvelle_donne(lesJoueurs[0]);
 	MFC_DONNE Vers_donne(lesJoueurs, laPartie, this);
 	Vers_donne.DoModal();
 	

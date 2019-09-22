@@ -49,6 +49,7 @@ public:
 private :	
 	CPartie *laPartie;
 	CJoueur *lesJoueurs[4];
+
 	int numero_joueur = 1;
 	int numero_contrat = 1;
 	int numero_poignee = 0;
