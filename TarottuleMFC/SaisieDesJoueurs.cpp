@@ -12,7 +12,7 @@
 
 IMPLEMENT_DYNAMIC(SaisieDesJoueurs, CDialogEx)
 
-SaisieDesJoueurs::SaisieDesJoueurs(CWnd* pParent /*=NULL*/)
+SaisieDesJoueurs::SaisieDesJoueurs(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent /*=NULL*/,string nom_fichier /*="save.csv"*/)
 	: CDialogEx(IDD_SAISIEDESJOUEURS, pParent)
 	, saisie_nom_joueur_1(_T(""))
 	, saisie_nom_joueur_2(_T(""))
@@ -20,13 +20,13 @@ SaisieDesJoueurs::SaisieDesJoueurs(CWnd* pParent /*=NULL*/)
 	, saisie_nom_joueur_4(_T(""))
 {
 	for (int i = 0; i < 4; i++)
-		lesJoueurs[i] = new CJoueur;
-
+		this->lesJoueurs[i] = lesJoueurs[i];
+	this->laPartie = laPartie;
+	this->nom_fichier = nom_fichier;
 }
 
 SaisieDesJoueurs::~SaisieDesJoueurs()
 {
-	delete laPartie;
 }
 
 void SaisieDesJoueurs::DoDataExchange(CDataExchange* pDX)
@@ -119,11 +119,20 @@ void SaisieDesJoueurs::OnBnClickedButton2()
 	UpdateData(false);
 
 	// TODO: ajoutez ici le code de votre gestionnaire de notification de contrôle
-	laPartie = new CPartie(lesJoueurs);
-	laPartie->Nouvelle_donne(lesJoueurs[0]);
-	MFC_DONNE Vers_donne(lesJoueurs, laPartie, this);
+
+	ofstream save(nom_fichier);
+	for (int i = 0; i < 4; i++)
+	{
+		save << lesJoueurs[i]->lireNom() << ";";
+	}
+	save << "Preneur;Contrat;Nombre de bouts;Poignee;Petit au bout;";
+	save.close();
+
+	MFC_DONNE Vers_donne(lesJoueurs, laPartie, nom_fichier, this);
+	PostMessage(WM_KEYDOWN, VK_ESCAPE, 0);
 	Vers_donne.DoModal();
-	
+
 	
 }
 
+int MFC_DONNE::nombre_donne = 0;

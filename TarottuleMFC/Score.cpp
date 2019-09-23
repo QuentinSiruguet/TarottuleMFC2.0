@@ -12,7 +12,7 @@
 
 IMPLEMENT_DYNAMIC(Score, CDialogEx)
 
-Score::Score(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent /*=NULL*/)
+Score::Score(CJoueur *lesJoueurs[], CPartie *laPartie, string nom_fichier, CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_SCORE, pParent)
 	, nom_joueur_1(_T(""))
 	, nom_joueur_2(_T(""))
@@ -30,6 +30,7 @@ Score::Score(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent /*=NULL*/)
 	for (int i = 0; i < 4; i++)
 		this->lesJoueurs[i] = lesJoueurs[i];
 	this->laPartie = laPartie;
+	this->nom_fichier = nom_fichier;
 
 	nom_joueur_1 = lesJoueurs[0]->lireNom().c_str();
 	nom_joueur_2 = lesJoueurs[1]->lireNom().c_str();
@@ -40,6 +41,8 @@ Score::Score(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent /*=NULL*/)
 	score_donne_2 = lesJoueurs[1]->lireScore_donne();
 	score_donne_3 = lesJoueurs[2]->lireScore_donne();
 	score_donne_4 = lesJoueurs[3]->lireScore_donne();
+	for (int i = 0; i < 4; i++)
+		lesJoueurs[i]->sauvegarde_score_donne(0);
 
 	score_total_1 = lesJoueurs[0]->lireScore();
 	score_total_2 = lesJoueurs[1]->lireScore();
@@ -73,6 +76,7 @@ void Score::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(Score, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &Score::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON3, &Score::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -81,5 +85,13 @@ END_MESSAGE_MAP()
 
 void Score::OnBnClickedButton2()
 {
+	MFC_DONNE Vers_donne(lesJoueurs, laPartie, nom_fichier, this);
+	PostMessage(WM_KEYDOWN, VK_ESCAPE, 0);
+	Vers_donne.DoModal();
+}
 
+
+void Score::OnBnClickedButton3()
+{
+	PostMessage(WM_KEYDOWN, VK_ESCAPE, 0);
 }

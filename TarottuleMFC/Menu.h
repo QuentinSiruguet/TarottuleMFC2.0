@@ -1,6 +1,7 @@
 #pragma once
-
-
+#include "CORE\Joueur.h"
+#include "CORE\Partie.h"
+#include "MFC_DONNE.h"
 // Boîte de dialogue Menu
 
 class Menu : public CDialogEx
@@ -22,4 +23,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton4();
+private: 
+
+	CPartie *laPartie;
+	CJoueur *lesJoueurs[4];
+	string nom_fichier;
 };

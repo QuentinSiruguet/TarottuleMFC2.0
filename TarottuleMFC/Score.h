@@ -8,7 +8,7 @@ class Score : public CDialogEx
 	DECLARE_DYNAMIC(Score)
 
 public:
-	Score(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent = NULL);   // constructeur standard
+	Score(CJoueur *lesJoueurs[], CPartie *laPartie, string, CWnd* pParent = NULL);   // constructeur standard
 	virtual ~Score();
 
 	// Données de boîte de dialogue
@@ -23,7 +23,7 @@ protected:
 private:
 	CJoueur *lesJoueurs[4];
 	CPartie *laPartie;
-
+	string nom_fichier;
 
 
 	CString nom_joueur_1;
@@ -46,4 +46,5 @@ private:
 public:
 	afx_msg void OnBnClickedButton2();
 
+	afx_msg void OnBnClickedButton3();
 };

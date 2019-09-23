@@ -11,7 +11,7 @@ class MFC_DONNE : public CDialogEx
 	DECLARE_DYNAMIC(MFC_DONNE)
 
 public:
-	MFC_DONNE(CJoueur * lesJoueurs[],CPartie *laPartie,  CWnd * pParent);
+	MFC_DONNE(CJoueur * lesJoueurs[],CPartie *laPartie, string, CWnd * pParent);
 	// constructeur standard
 	virtual ~MFC_DONNE();
 
@@ -46,9 +46,13 @@ public:
 	afx_msg void OnBnClickedpab1();
 	afx_msg void OnBnClickedpab2();
 
+	afx_msg void OnBnClickedboutonfindonne();
+	static int nombre_donne;
+
 private :	
 	CPartie *laPartie;
 	CJoueur *lesJoueurs[4];
+	string nom_fichier;
 
 	int numero_joueur = 1;
 	int numero_contrat = 1;
@@ -57,8 +61,4 @@ private :
 	bool petitaubout = 0;
 	int nbre_point_preneur;
 	int Nbre_bout_preneur;
-
-	
-public:
-	afx_msg void OnBnClickedboutonfindonne();
 };

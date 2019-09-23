@@ -13,7 +13,7 @@
 IMPLEMENT_DYNAMIC(MFC_DONNE, CDialogEx)
 
 
-MFC_DONNE::MFC_DONNE(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent)
+MFC_DONNE::MFC_DONNE(CJoueur *lesJoueurs[], CPartie *laPartie,string nom_fichier, CWnd* pParent)
 	: CDialogEx(IDD_MFC_DONNE, pParent)
 	, STjoueur1(_T(""))
 	, STjoueur2(_T(""))
@@ -26,6 +26,9 @@ MFC_DONNE::MFC_DONNE(CJoueur *lesJoueurs[], CPartie *laPartie, CWnd* pParent)
 		this->lesJoueurs[i] = lesJoueurs[i];
 
 	this->laPartie = laPartie;
+	this->nom_fichier = nom_fichier;
+	MFC_DONNE::nombre_donne++;
+	laPartie->Nouvelle_donne(lesJoueurs[nombre_donne%4]);
 
 	STjoueur1 = lesJoueurs[0]->lireNom().c_str();
 	STjoueur2 = lesJoueurs[1]->lireNom().c_str();
@@ -87,42 +90,35 @@ void MFC_DONNE::OnBnClickedjoueur1()
 	numero_joueur = 1;
 }
 
-
 void MFC_DONNE::OnBnClickedjoueur2()
 {
 	numero_joueur = 2;
 }
-
 
 void MFC_DONNE::OnBnClickedjoueur3()
 {
 	numero_joueur = 3;
 }
 
-
 void MFC_DONNE::OnBnClickedjoueur4()
 {
 	numero_joueur = 4;
 }
-
 
 void MFC_DONNE::OnBnClickedcontrat1()
 {
 	numero_contrat = 1;
 }
 
-
 void MFC_DONNE::OnBnClickedcontrat2()
 {
 	numero_contrat = 2;
 }
 
-
 void MFC_DONNE::OnBnClickedcontrat3()
 {
 	numero_contrat = 3;
 }
-
 
 void MFC_DONNE::OnBnClickedcontrat4()
 {
@@ -162,14 +158,14 @@ void MFC_DONNE::OnBnClickedpab1()
 void MFC_DONNE::OnBnClickedpab2()
 {
 	numero_pab = 1;
-
 }
 
 void MFC_DONNE::OnBnClickedboutonfindonne()
 {
+	UpdateData(true);
 	int point_preneur = nbre_point_preneur;
 	int bout_preneur = Nbre_bout_preneur;
-
+	UpdateData(false);
 	laPartie->Definir_IMH_Donne_Camp(numero_joueur);
 	laPartie->Transfert_IHM_Donne_contrat(static_cast<Contrat>(numero_contrat));
 	laPartie->Transfert_IHM_Donne_poignee(static_cast<Poignee>(numero_poignee));
@@ -179,8 +175,9 @@ void MFC_DONNE::OnBnClickedboutonfindonne()
 		laPartie->Transfert_IHM_Donne_petit_au_bouts(true);
 	laPartie->Transfert_IHM_Donne_points(point_preneur);
 	laPartie->Transfert_IHM_Donne_bouts(bout_preneur);
-	laPartie->Fin_Donne("save.csv");
+	laPartie->Fin_Donne(nom_fichier);
 	
-	Score score(lesJoueurs, laPartie, this);
+	Score score(lesJoueurs, laPartie, nom_fichier, this);
+	PostMessage(WM_KEYDOWN, VK_ESCAPE, 0);
 	score.DoModal();
 }

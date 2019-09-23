@@ -9,7 +9,7 @@ class SaisieDesJoueurs : public CDialogEx
 	DECLARE_DYNAMIC(SaisieDesJoueurs)
 
 public:
-	SaisieDesJoueurs(CWnd* pParent = NULL);   // constructeur standard
+	SaisieDesJoueurs(CJoueur *lesJoueurs[], CPartie *, CWnd* pParent = NULL,string = "save.csv");   // constructeur standard
 	virtual ~SaisieDesJoueurs();
 
 // Données de boîte de dialogue
@@ -31,10 +31,10 @@ public:
 
 
 private:
-	CJoueur *lesJoueurs[4];
 	CPartie *laPartie;
 
-
+	CJoueur *lesJoueurs[4];
+	string nom_fichier;
 	CString saisie_nom_joueur_1;
 	CString saisie_nom_joueur_2;
 	CString saisie_nom_joueur_3;
