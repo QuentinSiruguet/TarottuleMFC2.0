@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "afxdialogex.h"
 #include "SaisieDesJoueurs.h"
+#include "SaisieNomFichier.h"
 
 
 // Boîte de dialogue Menu
@@ -55,7 +56,9 @@ void Menu::OnBnClickedButton1()
 
 void Menu::OnBnClickedButton4()
 {
-
+	SaisieNomFichier Vers_saisie(&nom_fichier, this);
+	PostMessage(WM_KEYDOWN, VK_ESCAPE, 0);
+	Vers_saisie.DoModal();
 
 
 	ifstream *get_player;

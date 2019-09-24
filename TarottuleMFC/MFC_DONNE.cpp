@@ -166,6 +166,7 @@ void MFC_DONNE::OnBnClickedboutonfindonne()
 	int point_preneur = nbre_point_preneur;
 	int bout_preneur = Nbre_bout_preneur;
 	UpdateData(false);
+
 	laPartie->Definir_IMH_Donne_Camp(numero_joueur);
 	laPartie->Transfert_IHM_Donne_contrat(static_cast<Contrat>(numero_contrat));
 	laPartie->Transfert_IHM_Donne_poignee(static_cast<Poignee>(numero_poignee));

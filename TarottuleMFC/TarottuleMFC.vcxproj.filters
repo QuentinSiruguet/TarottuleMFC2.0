@@ -60,6 +60,9 @@
     <ClInclude Include="Score.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="SaisieNomFichier.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TarottuleMFC.cpp">
@@ -90,6 +93,9 @@
       <Filter>Fichiers sources\CORE</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SaisieNomFichier.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
