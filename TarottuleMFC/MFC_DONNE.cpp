@@ -77,6 +77,8 @@ BEGIN_MESSAGE_MAP(MFC_DONNE, CDialogEx)
 	ON_BN_CLICKED(IDC_pab1, &MFC_DONNE::OnBnClickedpab1)
 	ON_BN_CLICKED(IDC_pab2, &MFC_DONNE::OnBnClickedpab2)
 	ON_BN_CLICKED(ID_bouton_fin_donne, &MFC_DONNE::OnBnClickedboutonfindonne)
+	ON_EN_CHANGE(IDC_Saisie_PointPreneur, &MFC_DONNE::OnEnChangeSaisiePointpreneur)
+	ON_EN_CHANGE(IDC_Saisie_NbreBout, &MFC_DONNE::OnEnChangeSaisieNbrebout)
 END_MESSAGE_MAP()
 
 
@@ -181,4 +183,22 @@ void MFC_DONNE::OnBnClickedboutonfindonne()
 	Score score(lesJoueurs, laPartie, nom_fichier, this);
 	PostMessage(WM_KEYDOWN, VK_ESCAPE, 0);
 	score.DoModal();
+}
+
+
+void MFC_DONNE::OnEnChangeSaisiePointpreneur()
+{
+	UpdateData(true);
+	if (nbre_point_preneur < 0 || nbre_point_preneur > 100)
+		nbre_point_preneur = 0;
+	UpdateData(false);
+}
+
+
+void MFC_DONNE::OnEnChangeSaisieNbrebout()
+{
+	UpdateData(true);
+	if (Nbre_bout_preneur < 0 || Nbre_bout_preneur > 3)
+		Nbre_bout_preneur = 0;
+	UpdateData(false);
 }

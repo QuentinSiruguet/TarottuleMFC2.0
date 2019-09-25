@@ -61,4 +61,7 @@ private :
 	bool petitaubout = 0;
 	int nbre_point_preneur;
 	int Nbre_bout_preneur;
+public:
+	afx_msg void OnEnChangeSaisiePointpreneur();
+	afx_msg void OnEnChangeSaisieNbrebout();
 };
